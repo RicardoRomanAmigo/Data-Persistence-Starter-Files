@@ -2,23 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using UnityEngine.UI;
-
-
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] Text playerName;
+    [SerializeField] Text topScoreTxt;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject mainManagerObject = GameObject.Find("MainUIManager");
+        if (mainManagerObject != null)
+        {
+            MainManager mainManager = mainManagerObject.GetComponent<MainManager>();
+
+            mainManager.LoadPlayerName();
+
+        }
+
+        if(MainUIManager.Instance != null )
+        {
+            
+            topScoreTxt.text = "Best Score: " + MainUIManager.Instance.TopPlayerName + " " + MainUIManager.Instance.TopScore.ToString();
+        } 
     }
 
     // Update is called once per frame
@@ -48,7 +59,11 @@ public class MenuManager : MonoBehaviour
 
     public void NewNameSelected(Text text)
     {
-        MainUIManager.Instance.PlayerName = text;
+        
+            MainUIManager.Instance.PlayerName = text.text;
+
     }
+
+    
 
 }

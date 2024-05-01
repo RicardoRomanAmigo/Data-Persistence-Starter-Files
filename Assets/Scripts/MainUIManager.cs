@@ -8,8 +8,11 @@ public class MainUIManager : MonoBehaviour
 {
     public static MainUIManager Instance;
 
-    public Text PlayerName;
+    public string PlayerName;
 
+    public string TopPlayerName;
+
+    public int TopScore;
     
 
     private void Awake()
