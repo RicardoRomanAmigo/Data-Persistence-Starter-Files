@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class MainManager : MonoBehaviour
 {
@@ -11,12 +13,15 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    [SerializeField] Text ScoreTextTop;
     public GameObject GameOverText;
     
     private bool m_Started = false;
     private int m_Points;
     
     private bool m_GameOver = false;
+
+    private Text playerName;
 
     
     // Start is called before the first frame update
@@ -35,6 +40,17 @@ public class MainManager : MonoBehaviour
                 brick.PointValue = pointCountArray[i];
                 brick.onDestroyed.AddListener(AddPoint);
             }
+        }
+
+        if(MainUIManager.Instance != null)
+        {
+           playerName = MainUIManager.Instance.PlayerName;
+
+            Debug.Log(playerName);
+
+            ScoreTextTop.text = "Best Score : " + playerName.text + " " + m_Points;
+
+            
         }
     }
 
