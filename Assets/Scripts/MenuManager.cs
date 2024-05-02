@@ -11,25 +11,42 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Text playerName;
     [SerializeField] Text topScoreTxt;
 
+    [SerializeField] GameObject jsonDataObject;
+
     
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject mainManagerObject = GameObject.Find("MainUIManager");
-        if (mainManagerObject != null)
+        LoadGameData();
+
+        
+    }
+
+    //Metodo para retardar la carga hasta que se carguen los datos del JSON
+
+    private IEnumerator LoadGameDataAsync()
+    {
+        JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
+
+       jsonDataFile.LoadPlayerName();
+
+        while (jsonDataFile.IsLoading)
         {
-            MainManager mainManager = mainManagerObject.GetComponent<MainManager>();
-
-            mainManager.LoadPlayerName();
-
+            yield return null;
         }
 
-        if(MainUIManager.Instance != null )
-        {
-            
-            topScoreTxt.text = "Best Score: " + MainUIManager.Instance.TopPlayerName + " " + MainUIManager.Instance.TopScore.ToString();
-        } 
+        ProcessGameData();
+    }
+
+    public void LoadGameData()
+    {
+        StartCoroutine(LoadGameDataAsync());
+    }
+
+    public void ProcessGameData()
+    {
+        topScoreTxt.text = "Best Score: " + MainUIManager.Instance.TopPlayerName + " " + MainUIManager.Instance.TopScore.ToString();
     }
 
     // Update is called once per frame
@@ -65,5 +82,4 @@ public class MenuManager : MonoBehaviour
     }
 
     
-
 }

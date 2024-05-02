@@ -26,14 +26,28 @@ public class MainManager : MonoBehaviour
     private int topScore;
     private string topPlayerName;
 
-    private void Awake()
-    {
-        LoadPlayerName();
-    }
+    private bool isLoading = false;
+
+    [SerializeField] GameObject jsonDataObject;
+    private JsonData jsonDataFile;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
+        if (jsonDataFile != null)
+        {
+            jsonDataFile.LoadPlayerName();
+        }
+        else
+        {
+            Debug.LogError("JsonData component not found on 'jsonDataObject'!");
+        }
+        
+        
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -78,6 +92,12 @@ public class MainManager : MonoBehaviour
                 Ball.transform.SetParent(null);
                 Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
             }
+
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
+                jsonDataFile.SaveName(0, "None");
+            }
         }
         else if (m_GameOver)
         {
@@ -102,52 +122,21 @@ public class MainManager : MonoBehaviour
 
         if(m_Points > MainUIManager.Instance.TopScore)
         {
-            SaveName();
-        }
-    }
-
-    //Continuidad de datos entre sesiones
-
-    [System.Serializable]
-    class SaveData
-    {
-        public string TopPlayerName;
-        public int TopScore;
-    }
-
-    public void SaveName()
-    {
-        SaveData data = new SaveData();
-        data.TopPlayerName = playerName;
-        data.TopScore = m_Points;
-
-        string json = JsonUtility.ToJson(data);
-
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-    }
-
-    public void LoadPlayerName()
-    {
-        string path = Application.persistentDataPath + "/savefile.json";
-        
-        if (File.Exists(path))
-        {
-
-            string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
-
-            if (MainUIManager.Instance !=null)
+            JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
+            
+            if(jsonDataFile != null)
             {
-                MainUIManager.Instance.TopPlayerName = data.TopPlayerName;
-                MainUIManager.Instance.TopScore = data.TopScore;
+                jsonDataFile.SaveName(m_Points, playerName);
             }
             else
             {
-                Debug.LogError("MainUIManager instance not found!");
+                Debug.LogError("JsonDataFile is null");
             }
-
+            
         }
     }
+
+    
 
     void RestardGame()
     {

@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101204285}
   - component: {fileID: 101204284}
-  - component: {fileID: 101204286}
+  - component: {fileID: 101204287}
   m_Layer: 0
   m_Name: MainUIManager
   m_TagString: Untagged
@@ -170,7 +170,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &101204286
+--- !u!114 &101204287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,15 +179,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 101204283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d110623a642692246a42fbc2d8d89884, type: 3}
+  m_Script: {fileID: 11500000, guid: 68b3094485a10cd4598e1d6cae49996d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BrickPrefab: {fileID: 0}
-  LineCount: 6
-  Ball: {fileID: 0}
-  ScoreText: {fileID: 0}
-  ScoreTextTop: {fileID: 0}
-  GameOverText: {fileID: 0}
 --- !u!1 &811713383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 1228425124}
   topScoreTxt: {fileID: 1038260455}
+  jsonDataObject: {fileID: 101204283}
 --- !u!1 &1826185735
 GameObject:
   m_ObjectHideFlags: 0
