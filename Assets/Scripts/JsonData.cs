@@ -10,12 +10,8 @@ public class JsonData : MonoBehaviour
     private bool isLoading;
     private int points;
     private string playerName;
+    
 
-
-    private void Awake()
-    {
-        
-    }
 
     //Continuidad de datos entre sesiones
 
@@ -24,13 +20,19 @@ public class JsonData : MonoBehaviour
     {
         public string TopPlayerName;
         public int TopScore;
+        //Lista records
+        public List<ScoreEntryS> HighScores;
+     
     }
+
+    
 
     public void SaveName(int points, string name)
     {
         SaveData data = new SaveData();
         data.TopPlayerName = name;
         data.TopScore = points;
+        
 
         string json = JsonUtility.ToJson(data);
 
@@ -65,4 +67,7 @@ public class JsonData : MonoBehaviour
     {
         get { return isLoading; }
     }
+
+
+    
 }

@@ -16,6 +16,7 @@ public class MainManager : MonoBehaviour
     [SerializeField] Text ScoreText;
     [SerializeField] Text ScoreTextTop;
     public GameObject GameOverText;
+    public GameObject GameOverPanel;
     
     private bool m_Started = false;
     private int m_Points;
@@ -36,17 +37,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
-        if (jsonDataFile != null)
-        {
-            jsonDataFile.LoadPlayerName();
-        }
-        else
-        {
-            Debug.LogError("JsonData component not found on 'jsonDataObject'!");
-        }
-        
-        
+
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -63,7 +54,7 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        //Continuacion de datos entre escenas
+        //Recuperacion datos para escena
         if(MainUIManager.Instance != null)
         {
             playerName = MainUIManager.Instance.PlayerName;
@@ -80,6 +71,8 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
+        BetterScore();
+
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -107,6 +100,8 @@ public class MainManager : MonoBehaviour
                 RestardGame();
             }
         }
+
+        
     }
 
     void AddPoint(int point)
@@ -119,6 +114,7 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        GameOverPanel.SetActive(true);
 
         if(m_Points > MainUIManager.Instance.TopScore)
         {
@@ -154,4 +150,15 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    void BetterScore()
+    {
+        if (m_Points > MainUIManager.Instance.TopScore)
+        {
+            ScoreTextTop.text = "Best Score: " + playerName + ": " + m_Points;
+
+
+        }
+    }
+
+    
 }

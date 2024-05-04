@@ -18,12 +18,18 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadGameData();
+        
+       LoadGameData();
 
         
     }
 
     //Metodo para retardar la carga hasta que se carguen los datos del JSON
+
+    public void LoadGameData()
+    {
+        StartCoroutine(LoadGameDataAsync());
+    }
 
     private IEnumerator LoadGameDataAsync()
     {
@@ -35,14 +41,11 @@ public class MenuManager : MonoBehaviour
         {
             yield return null;
         }
-
+        
         ProcessGameData();
     }
 
-    public void LoadGameData()
-    {
-        StartCoroutine(LoadGameDataAsync());
-    }
+    
 
     public void ProcessGameData()
     {
@@ -63,6 +66,11 @@ public class MenuManager : MonoBehaviour
 
             NewNameSelected(playerName);
         }
+    }
+
+    public void HighScore()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void ExitGame()

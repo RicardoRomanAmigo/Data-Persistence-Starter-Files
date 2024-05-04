@@ -13,11 +13,10 @@ public class MainUIManager : MonoBehaviour
     public string TopPlayerName;
 
     public int TopScore;
-    
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -26,4 +25,5 @@ public class MainUIManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
 }
