@@ -133,9 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 101204285}
   - component: {fileID: 101204284}
-  - component: {fileID: 101204287}
-  - component: {fileID: 101204288}
   - component: {fileID: 101204286}
+  - component: {fileID: 101204287}
   m_Layer: 0
   m_Name: MainUIManager
   m_TagString: Untagged
@@ -170,7 +169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &101204286
 MonoBehaviour:
@@ -193,21 +192,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 101204283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b3094485a10cd4598e1d6cae49996d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5db35198f154f894bb7750981c8dc688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &101204288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101204283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c5e0be2745eca47a574ca900ac2c1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  saveData:
+    TopScore: 10
+    TopPlayerName: Ricardo
+    PosX: 1
+    PosY: 1
 --- !u!1 &811713383
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771020341
 GameObject:
@@ -1258,7 +1250,7 @@ RectTransform:
   - {fileID: 1826185736}
   - {fileID: 941027095}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1279,7 +1271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 1228425124}
   topScoreTxt: {fileID: 1038260455}
-  jsonDataObject: {fileID: 101204283}
+  saveLoadSystem: {fileID: 101204287}
 --- !u!1 &1826185735
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainUIManager : MonoBehaviour
 {
+    //Guardado de datos entre escenas
+
     public static MainUIManager Instance;
 
     public string PlayerName;
@@ -13,6 +15,7 @@ public class MainUIManager : MonoBehaviour
     public string TopPlayerName;
 
     public int TopScore;
+
 
     private void Awake()
     {

@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
+using System.Collections.Generic;
 
 
 public class MainManager : MonoBehaviour
@@ -29,15 +28,15 @@ public class MainManager : MonoBehaviour
 
     private bool isLoading = false;
 
-    [SerializeField] GameObject jsonDataObject;
-    private JsonData jsonDataFile;
+    SaveLoadSystem saveLoadSystem;
+    
 
     
 
     // Start is called before the first frame update
     void Start()
     {
-
+        saveLoadSystem = GameObject.FindObjectOfType<SaveLoadSystem>();
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -88,8 +87,8 @@ public class MainManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.L))
             {
-                JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
-                jsonDataFile.SaveName(0, "None");
+                /*JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
+                jsonDataFile.SaveName(0, "None");*/
             }
         }
         else if (m_GameOver)
@@ -118,11 +117,19 @@ public class MainManager : MonoBehaviour
 
         if(m_Points > MainUIManager.Instance.TopScore)
         {
-            JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
-            
-            if(jsonDataFile != null)
+            //Guardo los en entre escenas
+            MainUIManager.Instance.TopScore = m_Points;
+            MainUIManager.Instance.TopPlayerName = playerName;
+
+            saveLoadSystem.SaveData.TopScore = MainUIManager.Instance.TopScore;
+            saveLoadSystem.SaveData.TopPlayerName = MainUIManager.Instance.TopPlayerName;
+            NewLineToRecords(MainUIManager.Instance.PlayerName, m_Points);
+
+            if (saveLoadSystem != null)
             {
-                jsonDataFile.SaveName(m_Points, playerName);
+                Debug.Log("Voy a grabar");
+                saveLoadSystem.Save();
+
             }
             else
             {
@@ -155,10 +162,35 @@ public class MainManager : MonoBehaviour
         if (m_Points > MainUIManager.Instance.TopScore)
         {
             ScoreTextTop.text = "Best Score: " + playerName + ": " + m_Points;
-
-
+            
         }
     }
 
-    
+    void NewLineToRecords(string name, int points)
+    {
+        ScoreEntry newEntry = new ScoreEntry { Name = name, Score = points };  
+
+        bool isTopScore = false;
+        foreach(ScoreEntry entry in saveLoadSystem.SaveData.TopScores)
+        {
+            if(points > entry.Score)
+            {
+                isTopScore = true;
+                break;
+            }
+        }
+       if(isTopScore)
+        {
+            saveLoadSystem.SaveData.TopScores.Add(newEntry);
+            List<ScoreEntry> sortedScores = new List<ScoreEntry>(saveLoadSystem.SaveData.TopScores);
+            sortedScores.Sort((ScoreEntry a, ScoreEntry b) => b.Score.CompareTo(a.Score));
+            saveLoadSystem.SaveData.TopScores = sortedScores;
+
+
+            if (saveLoadSystem.SaveData.TopScores.Count > 10)
+            {
+                saveLoadSystem.SaveData.TopScores.RemoveAt(saveLoadSystem.SaveData.TopScores.Count - 1);
+            }
+        }
+    }
 }

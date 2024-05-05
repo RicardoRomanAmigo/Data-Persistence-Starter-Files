@@ -11,51 +11,42 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Text playerName;
     [SerializeField] Text topScoreTxt;
 
-    [SerializeField] GameObject jsonDataObject;
+    [SerializeField] SaveLoadSystem saveLoadSystem;
 
-    
+    private bool dataLoaded = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-       LoadGameData();
-
-        
+       
+        LoadGameData();   
     }
 
     //Metodo para retardar la carga hasta que se carguen los datos del JSON
-
     public void LoadGameData()
     {
-        StartCoroutine(LoadGameDataAsync());
+        if (!dataLoaded)
+        {
+            StartCoroutine(LoadGameDataAsync());
+            dataLoaded = true;
+        }
     }
 
     private IEnumerator LoadGameDataAsync()
     {
-        JsonData jsonDataFile = jsonDataObject.GetComponent<JsonData>();
+        Debug.Log(saveLoadSystem);
+        
+        saveLoadSystem.Load();
 
-       jsonDataFile.LoadPlayerName();
+        yield return new WaitForSeconds(2f);
 
-        while (jsonDataFile.IsLoading)
-        {
-            yield return null;
-        }
         
         ProcessGameData();
     }
-
     
-
     public void ProcessGameData()
     {
         topScoreTxt.text = "Best Score: " + MainUIManager.Instance.TopPlayerName + " " + MainUIManager.Instance.TopScore.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void StartGame()
@@ -81,13 +72,11 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
 #endif
     }
-
     public void NewNameSelected(Text text)
     {
         
             MainUIManager.Instance.PlayerName = text.text;
 
     }
-
-    
+ 
 }

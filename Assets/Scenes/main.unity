@@ -662,7 +662,6 @@ MonoBehaviour:
   ScoreTextTop: {fileID: 2078529056}
   GameOverText: {fileID: 474497238}
   GameOverPanel: {fileID: 87768320}
-  jsonDataObject: {fileID: 450625940}
 --- !u!114 &450625943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,7 +1333,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 450625944}
         m_TargetAssemblyTypeName: ToMenu, Assembly-CSharp
-        m_MethodName: toMenu
+        m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
