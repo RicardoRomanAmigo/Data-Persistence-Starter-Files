@@ -20,7 +20,7 @@ public class HighScoreManager : MonoBehaviour
     {
         saveLoadSystem = GameObject.FindObjectOfType<SaveLoadSystem>();
 
-        StartCoroutine(LinesInstance());
+        
     }
 
     private void Update()
@@ -32,17 +32,6 @@ public class HighScoreManager : MonoBehaviour
         
     }
 
-    IEnumerator LinesInstance()
-    {
-        ScoreEntry newEntry = new ScoreEntry();
-        foreach (ScoreEntry entry in saveLoadSystem.SaveData.TopScores)
-        {
-            lineText.text = entry.Name + ": " + entry.Score;
-            Instantiate(linePrefab, linePos.transform.position, Quaternion.identity);
-            linePrefab.gameObject.GetComponent<Text>().text = lineText.text;
-        }
-
-        yield return new WaitForSeconds(2);
-    }
+    
     
 }

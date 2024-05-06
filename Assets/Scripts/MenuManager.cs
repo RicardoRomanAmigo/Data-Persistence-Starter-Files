@@ -19,7 +19,11 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
        
-        LoadGameData();   
+        LoadGameData();  
+        
+        MainUIManager.Instance.TopPlayers = FileHandler.ReadFromJSON<InputEntry>("topScore.json");
+
+        Debug.Log(MainUIManager.Instance.TopPlayers);
     }
 
     //Metodo para retardar la carga hasta que se carguen los datos del JSON
@@ -34,13 +38,11 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator LoadGameDataAsync()
     {
-        Debug.Log(saveLoadSystem);
-        
+
         saveLoadSystem.Load();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.2f);
 
-        
         ProcessGameData();
     }
     

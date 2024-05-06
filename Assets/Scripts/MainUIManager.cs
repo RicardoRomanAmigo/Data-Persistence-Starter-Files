@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MainUIManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MainUIManager : MonoBehaviour
     public string TopPlayerName;
 
     public int TopScore;
+
+    public List<InputEntry> TopPlayers = new List<InputEntry>();
 
 
     private void Awake()

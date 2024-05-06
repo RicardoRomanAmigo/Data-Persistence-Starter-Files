@@ -8,18 +8,17 @@ public class SaveData
 {
     public int TopScore;
     public string TopPlayerName;
+
     //Guardar un vector
     public float PosX;
     public float PosY;
-
-    //test lista
-    public List<ScoreEntry> TopScores = new List<ScoreEntry>();
+    public List<SaveData> dataScores;
 
     //Constructor para podeer acceder a sus valores
     public SaveData()
     {
         TopScore = 0;
-        TopPlayerName = "";
+        TopPlayerName = " ";
 
         //Guardado del vector
         PosX = 1;
@@ -28,9 +27,4 @@ public class SaveData
 
 }
 
-//test lista
-public class ScoreEntry
-{
-    public string Name;
-    public float Score;
-}
+

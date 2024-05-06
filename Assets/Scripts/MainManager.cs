@@ -29,6 +29,8 @@ public class MainManager : MonoBehaviour
     private bool isLoading = false;
 
     SaveLoadSystem saveLoadSystem;
+
+    InputHandler inputHandler;
     
 
     
@@ -37,6 +39,7 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         saveLoadSystem = GameObject.FindObjectOfType<SaveLoadSystem>();
+        inputHandler = GameObject.FindObjectOfType<InputHandler>();
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -123,12 +126,13 @@ public class MainManager : MonoBehaviour
 
             saveLoadSystem.SaveData.TopScore = MainUIManager.Instance.TopScore;
             saveLoadSystem.SaveData.TopPlayerName = MainUIManager.Instance.TopPlayerName;
-            NewLineToRecords(MainUIManager.Instance.PlayerName, m_Points);
+            
 
             if (saveLoadSystem != null)
             {
-                Debug.Log("Voy a grabar");
+                
                 saveLoadSystem.Save();
+                inputHandler.AddNameToList(playerName, m_Points);
 
             }
             else
@@ -138,8 +142,6 @@ public class MainManager : MonoBehaviour
             
         }
     }
-
-    
 
     void RestardGame()
     {
@@ -166,31 +168,4 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    void NewLineToRecords(string name, int points)
-    {
-        ScoreEntry newEntry = new ScoreEntry { Name = name, Score = points };  
-
-        bool isTopScore = false;
-        foreach(ScoreEntry entry in saveLoadSystem.SaveData.TopScores)
-        {
-            if(points > entry.Score)
-            {
-                isTopScore = true;
-                break;
-            }
-        }
-       if(isTopScore)
-        {
-            saveLoadSystem.SaveData.TopScores.Add(newEntry);
-            List<ScoreEntry> sortedScores = new List<ScoreEntry>(saveLoadSystem.SaveData.TopScores);
-            sortedScores.Sort((ScoreEntry a, ScoreEntry b) => b.Score.CompareTo(a.Score));
-            saveLoadSystem.SaveData.TopScores = sortedScores;
-
-
-            if (saveLoadSystem.SaveData.TopScores.Count > 10)
-            {
-                saveLoadSystem.SaveData.TopScores.RemoveAt(saveLoadSystem.SaveData.TopScores.Count - 1);
-            }
-        }
-    }
 }
