@@ -26,8 +26,6 @@ public class MainManager : MonoBehaviour
     private int topScore;
     private string topPlayerName;
 
-    private bool isLoading = false;
-
     SaveLoadSystem saveLoadSystem;
 
     InputHandler inputHandler;
@@ -38,7 +36,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        saveLoadSystem = GameObject.FindObjectOfType<SaveLoadSystem>();
+        //saveLoadSystem = GameObject.FindObjectOfType<SaveLoadSystem>();
         inputHandler = GameObject.FindObjectOfType<InputHandler>();
 
         const float step = 0.6f;
@@ -118,29 +116,18 @@ public class MainManager : MonoBehaviour
         GameOverText.SetActive(true);
         GameOverPanel.SetActive(true);
 
-        if(m_Points > MainUIManager.Instance.TopScore)
-        {
-            //Guardo los en entre escenas
-            MainUIManager.Instance.TopScore = m_Points;
-            MainUIManager.Instance.TopPlayerName = playerName;
+        
 
-            saveLoadSystem.SaveData.TopScore = MainUIManager.Instance.TopScore;
-            saveLoadSystem.SaveData.TopPlayerName = MainUIManager.Instance.TopPlayerName;
-            
-
-            if (saveLoadSystem != null)
-            {
-                
-                saveLoadSystem.Save();
-                inputHandler.AddNameToList(playerName, m_Points);
-
+            if (inputHandler != null)
+            {               
+                //saveLoadSystem.Save();
+                inputHandler.AddNameToList(playerName, m_Points);              
             }
             else
             {
                 Debug.LogError("JsonDataFile is null");
             }
-            
-        }
+        
     }
 
     void RestardGame()

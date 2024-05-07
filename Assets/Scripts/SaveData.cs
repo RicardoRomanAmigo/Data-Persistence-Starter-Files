@@ -12,7 +12,7 @@ public class SaveData
     //Guardar un vector
     public float PosX;
     public float PosY;
-    public List<SaveData> dataScores;
+    //public List<SaveData> dataScores;
 
     //Constructor para podeer acceder a sus valores
     public SaveData()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -13,15 +14,19 @@ public class InputHandler : MonoBehaviour
     {
         entries = FileHandler.ReadFromJSON<InputEntry>(filename);
 
+        MainUIManager.Instance.TopPlayers = entries;
+
         SortList(entries);
 
+        TopPlayer();
+
         //Debug for the list
-        foreach (var entry in entries)
+        foreach (var entry in MainUIManager.Instance.TopPlayers)
         {
             if (entry is InputEntry) // Ensure it's an InputEntry object
             {
                 InputEntry inputEntry = (InputEntry)entry;
-                Debug.Log($"Player: {inputEntry.playerName}, Points: {inputEntry.points}");
+                
             }
             else
             {
@@ -34,19 +39,33 @@ public class InputHandler : MonoBehaviour
     {
         entries.Add(new InputEntry(name, number));
 
+        SortList(entries);
+
+        LimitToTen();
+
+        TopPlayer() ;
+
+        MainUIManager.Instance.TopPlayers = entries;
+
         FileHandler.SaveToJSON<InputEntry>(entries,filename);
     }
 
     public void SortList(List<InputEntry> listName)
     {
-        listName.Sort((a, b) => ((a.points).CompareTo(b.points)));
+        listName.Sort((a, b) => ((b.points).CompareTo(a.points)));
     }
 
     public void LimitToTen()
     {
-        if(entries.Count > 10) 
+        if(entries.Count >= 10) 
         {
             entries.RemoveAt(entries.Count -1);
         }
+    }
+
+    public void TopPlayer()
+    {
+        MainUIManager.Instance.TopPlayerName = entries.FirstOrDefault().playerName;
+        MainUIManager.Instance.TopScore = entries.FirstOrDefault().points;
     }
 }

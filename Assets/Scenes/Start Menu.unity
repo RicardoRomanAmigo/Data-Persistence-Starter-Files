@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 101204285}
-  - component: {fileID: 101204287}
   - component: {fileID: 101204284}
   - component: {fileID: 101204286}
   - component: {fileID: 101204288}
@@ -185,24 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb1d90faf5afba4c8775fbd43562712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &101204287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101204283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5db35198f154f894bb7750981c8dc688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveData:
-    TopScore: 10
-    TopPlayerName: Ricardo
-    PosX: 1
-    PosY: 1
-    dataScores: []
 --- !u!114 &101204288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1287,7 +1268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 1228425124}
   topScoreTxt: {fileID: 1038260455}
-  saveLoadSystem: {fileID: 101204287}
+  saveLoadSystem: {fileID: 0}
 --- !u!1 &1826185735
 GameObject:
   m_ObjectHideFlags: 0

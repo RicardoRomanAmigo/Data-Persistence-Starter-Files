@@ -13,37 +13,17 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] SaveLoadSystem saveLoadSystem;
 
-    private bool dataLoaded = false;
-
     // Start is called before the first frame update
     void Start()
     {
        
-        LoadGameData();  
+        //LoadGameData();  
         
         MainUIManager.Instance.TopPlayers = FileHandler.ReadFromJSON<InputEntry>("topScore.json");
 
-        Debug.Log(MainUIManager.Instance.TopPlayers);
-    }
-
-    //Metodo para retardar la carga hasta que se carguen los datos del JSON
-    public void LoadGameData()
-    {
-        if (!dataLoaded)
-        {
-            StartCoroutine(LoadGameDataAsync());
-            dataLoaded = true;
-        }
-    }
-
-    private IEnumerator LoadGameDataAsync()
-    {
-
-        saveLoadSystem.Load();
-
-        yield return new WaitForSeconds(0.2f);
-
         ProcessGameData();
+
+        //Debug.Log(MainUIManager.Instance.TopPlayers);
     }
     
     public void ProcessGameData()
@@ -74,6 +54,7 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
     public void NewNameSelected(Text text)
     {
         
