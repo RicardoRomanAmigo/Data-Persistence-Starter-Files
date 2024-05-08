@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour
 {
-    SaveLoadSystem saveLoadSystem;
+    
 
     
     [SerializeField] RectTransform linePos;

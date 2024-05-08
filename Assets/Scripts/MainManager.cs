@@ -26,7 +26,6 @@ public class MainManager : MonoBehaviour
     private int topScore;
     private string topPlayerName;
 
-    SaveLoadSystem saveLoadSystem;
 
     InputHandler inputHandler;
     

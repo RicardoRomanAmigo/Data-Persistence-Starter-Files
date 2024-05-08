@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,10 @@ public class MainUIManager : MonoBehaviour
     public int TopScore;
 
     public List<InputEntry> TopPlayers = new List<InputEntry>();
+
+    public bool MusicOn;
+
+    public float MusicPauseTime;
 
 
     private void Awake()
