@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour
 {
-    
 
+    
     
     [SerializeField] RectTransform linePos;
     
@@ -46,10 +46,11 @@ public class HighScoreManager : MonoBehaviour
     private void ScoresUp()
     {
         //List<InputEntry> reversedList = SortListinvers(MainUIManager.Instance.TopPlayers);
-        
+        int puesto = 1;
 
         foreach (var entry in MainUIManager.Instance.TopPlayers)
         {
+            
             Vector3 spawnLocation = new Vector3(linePos.localPosition.x, linePos.localPosition.y, linePos.localPosition.z);
 
             GameObject newLine = Instantiate(linePrefab, spawnLocation, Quaternion.identity);
@@ -62,15 +63,16 @@ public class HighScoreManager : MonoBehaviour
 
             newlineTransform.localPosition = newLinePosition;
 
-            Text newLineName = newLine.transform.GetChild(0).GetComponent<Text>();
-            Text newLineScore = newLine.transform.GetChild(1).GetComponent<Text>();
+            Text newLineName = newLine.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>();
+            Text newLineScore = newLine.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
 
-            newLineName.text = $"Player: {entry.playerName}";
+            newLineName.text = $"#{puesto}  Player: {entry.playerName}";
             newLineScore.text = $"Score: {entry.points}";
 
             //StartCoroutine(MoveUp(newLine));
 
-            posY += 40;
+            posY += 36;
+            puesto++;
         }
     }
 

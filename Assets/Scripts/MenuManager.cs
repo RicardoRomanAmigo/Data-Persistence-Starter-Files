@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Text playerName;
     [SerializeField] Text topScoreTxt;
     [SerializeField] Text alertText;
+    [SerializeField] Animator panelTopPlayer;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +22,13 @@ public class MenuManager : MonoBehaviour
         MainUIManager.Instance.TopPlayers = FileHandler.ReadFromJSON<InputEntry>("topScore.json");
 
         ProcessGameData();
+
+        TopPanelDown();
     }
     
     public void ProcessGameData()
     {
-        topScoreTxt.text = "Best Score: " + MainUIManager.Instance.TopPlayerName + " " + MainUIManager.Instance.TopScore.ToString();
+        topScoreTxt.text = "Name: " + MainUIManager.Instance.TopPlayerName + " - Score: " + MainUIManager.Instance.TopScore.ToString();
     }
 
     public void StartGame()
@@ -67,5 +71,10 @@ public class MenuManager : MonoBehaviour
             alertText.text = "";
         }
         
+    }
+
+    void TopPanelDown()
+    {
+        panelTopPlayer.Play("PanelTopPlayer");
     }
 }
