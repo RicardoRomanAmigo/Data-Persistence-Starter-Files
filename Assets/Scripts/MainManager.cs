@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class MainManager : MonoBehaviour
 {
     public Brick BrickPrefab;
-    public int LineCount = 6;
+    public int LineCount = 5;
     public Rigidbody Ball;
 
     [SerializeField] Text ScoreText;
@@ -28,14 +28,18 @@ public class MainManager : MonoBehaviour
 
 
     InputHandler inputHandler;
-    
+
+    AudioSource musicPlayer;
+
+    float mainVolume = 0.3f;
 
     
 
     // Start is called before the first frame update
     void Start()
     {
-        //saveLoadSystem = GameObject.FindObjectOfType<SaveLoadSystem>();
+        MusicVolume(mainVolume);
+
         inputHandler = GameObject.FindObjectOfType<InputHandler>();
 
         const float step = 0.6f;
@@ -154,4 +158,9 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    void MusicVolume(float level)
+    {
+        musicPlayer = GameObject.FindGameObjectWithTag("MainContainer").transform.GetComponent<AudioSource>();
+        musicPlayer.volume = level;
+    }
 }

@@ -8,6 +8,7 @@ public class MusicButton : MonoBehaviour
 {
     [SerializeField] GameObject onButton;
     [SerializeField] GameObject offButton;
+    //[SerializeField] GameObject closeButton;
     [SerializeField] AudioClip clickSound;
     AudioSource music;
     AudioSource fxSounds;
@@ -68,7 +69,7 @@ public class MusicButton : MonoBehaviour
         }
     }
 
-    void MakeClick()
+   public void MakeClick()
     {
         fxSounds.volume = 0.3f;
         fxSounds.PlayOneShot(clickSound);
