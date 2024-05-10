@@ -7,6 +7,11 @@ public class Ball : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
 
+    [SerializeField] AudioClip myClipPaddle;
+    [SerializeField] AudioClip myClipSides;
+    float volumePaddle = 0.3f;
+    float volumeSides = 1f;
+
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -32,5 +37,23 @@ public class Ball : MonoBehaviour
         }
 
         m_Rigidbody.velocity = velocity;
+
+        if(other.transform.name == "Paddle")
+        {
+            if(myClipPaddle != null)
+            {
+                AudioManager.Instance.Volume(volumePaddle);
+                AudioManager.Instance.PlaySound(myClipPaddle);
+            }
+        }
+        
+        if(other.transform.name == "Cube")
+        {
+            if(myClipSides != null)
+            {
+                AudioManager.Instance.Volume(volumeSides);
+                AudioManager.Instance.PlaySound(myClipSides);
+            }
+        }
     }
 }

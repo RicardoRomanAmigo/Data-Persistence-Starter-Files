@@ -33,11 +33,19 @@ public class MainManager : MonoBehaviour
 
     float mainVolume = 0.3f;
 
+    //Once the player brakes the record
+    bool betterScore = false;
+    [SerializeField] AudioClip scoreBrake;
+
     
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        
+
         MusicVolume(mainVolume);
 
         inputHandler = GameObject.FindObjectOfType<InputHandler>();
@@ -153,6 +161,13 @@ public class MainManager : MonoBehaviour
     {
         if (m_Points > MainUIManager.Instance.TopScore)
         {
+            if(betterScore == false)
+            {
+                StartCoroutine(PlayAndDestroySound(scoreBrake));
+            }
+            
+            betterScore = true;
+
             ScoreTextTop.text = "Best Score: " + playerName + ": " + m_Points;
             
         }
@@ -162,5 +177,19 @@ public class MainManager : MonoBehaviour
     {
         musicPlayer = GameObject.FindGameObjectWithTag("MainContainer").transform.GetComponent<AudioSource>();
         musicPlayer.volume = level;
+    }
+
+    
+
+    IEnumerator PlayAndDestroySound(AudioClip audioClip)
+    {
+        GameObject audioObject = new GameObject("AudioObject");
+        AudioSource audioSource = MainUIManager.Instance.AudioSourcePrefab.transform.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
+
+        yield return new WaitForSeconds(audioClip.length); // Espera la duración del clip
+
+        Destroy(audioObject); // Destruye el GameObject y el AudioSource
     }
 }

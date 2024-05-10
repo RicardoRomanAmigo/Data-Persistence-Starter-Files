@@ -35,7 +35,7 @@ public class TextManager : MonoBehaviour
             colorOriginal = myText.color;  
         }
 
-        fxAudio = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
+        //fxAudio = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
 
 
     }
@@ -76,13 +76,15 @@ public class TextManager : MonoBehaviour
 
         if (mouseClicFx != null)
         {
-            fxAudio.PlayOneShot(mouseClicFx);
+            AudioManager.Instance.PlaySound(mouseClicFx);
         }
     }
 
     void MakeClick()
     {
-        fxAudio.volume = 0.1f;
-        fxAudio.PlayOneShot(mouseEnterFx);
+        //fxAudio.volume = 0.1f;
+        //fxAudio.PlayOneShot(mouseEnterFx);
+
+        AudioManager.Instance.PlaySound(mouseEnterFx);
     }
 }

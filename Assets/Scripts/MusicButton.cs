@@ -17,7 +17,8 @@ public class MusicButton : MonoBehaviour
     void Start()
     {
         music = GameObject.FindGameObjectWithTag("MainContainer").GetComponent<AudioSource>();
-        fxSounds = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
+        //fxSounds = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
+
         
 
         if (music.isPlaying)
@@ -71,7 +72,10 @@ public class MusicButton : MonoBehaviour
 
    public void MakeClick()
     {
-        fxSounds.volume = 0.3f;
-        fxSounds.PlayOneShot(clickSound);
+        //fxSounds.volume = 0.3f;
+        //fxSounds.PlayOneShot(clickSound);
+
+        
+       AudioManager.Instance.PlaySound(clickSound);
     }
 }

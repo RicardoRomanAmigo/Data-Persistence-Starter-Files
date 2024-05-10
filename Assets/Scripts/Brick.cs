@@ -10,6 +10,8 @@ public class Brick : MonoBehaviour
     
     public int PointValue;
 
+    [SerializeField] AudioClip myClip;
+
     void Start()
     {
         var renderer = GetComponentInChildren<Renderer>();
@@ -35,6 +37,9 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        //Sound
+        AudioManager.Instance.PlaySound(myClip);
+        
         onDestroyed.Invoke(PointValue);
         
         //slight delay to be sure the ball have time to bounce

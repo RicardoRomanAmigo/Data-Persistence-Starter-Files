@@ -112,3 +112,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   PointValue: 0
+  myClip: {fileID: 8300000, guid: 1b25991aa345db34b9f66fe0b19f1a44, type: 3}
