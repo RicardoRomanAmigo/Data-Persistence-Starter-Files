@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Text topScoreTxt;
     [SerializeField] Text alertText;
     [SerializeField] Animator panelTopPlayer;
-    [SerializeField] GameObject audioSourcePrefab;
+    //[SerializeField] GameObject audioSourcePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
 
         TopPanelDown();
 
-        MainUIManager.Instance.AudioSourcePrefab = audioSourcePrefab;
+        //MainUIManager.Instance.AudioSourcePrefab = audioSourcePrefab;
     }
     
     public void ProcessGameData()

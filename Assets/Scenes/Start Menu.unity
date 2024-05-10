@@ -209,7 +209,6 @@ GameObject:
   m_Component:
   - component: {fileID: 101204285}
   - component: {fileID: 101204284}
-  - component: {fileID: 101204286}
   - component: {fileID: 101204288}
   - component: {fileID: 101204287}
   m_Layer: 0
@@ -237,7 +236,7 @@ MonoBehaviour:
   TopPlayers: []
   MusicOn: 0
   MusicPauseTime: 0
-  AudioSourcePrefab: {fileID: 3451796248524175737, guid: ac86968ca1f348447a5bcf9b68ef8167, type: 3}
+  AudioSourcePrefab: {fileID: 7972155897383258920, guid: ac86968ca1f348447a5bcf9b68ef8167, type: 3}
 --- !u!4 &101204285
 Transform:
   m_ObjectHideFlags: 0
@@ -252,18 +251,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &101204286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101204283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb1d90faf5afba4c8775fbd43562712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &101204287
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2467,7 +2454,6 @@ MonoBehaviour:
   topScoreTxt: {fileID: 1038260455}
   alertText: {fileID: 1208877550}
   panelTopPlayer: {fileID: 1316432556}
-  audioSourcePrefab: {fileID: 0}
 --- !u!114 &1822764903
 MonoBehaviour:
   m_ObjectHideFlags: 0

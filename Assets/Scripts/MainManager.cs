@@ -36,6 +36,7 @@ public class MainManager : MonoBehaviour
     //Once the player brakes the record
     bool betterScore = false;
     [SerializeField] AudioClip scoreBrake;
+    [SerializeField] AudioSource audioManager;
 
     
 
@@ -163,7 +164,8 @@ public class MainManager : MonoBehaviour
         {
             if(betterScore == false)
             {
-                StartCoroutine(PlayAndDestroySound(scoreBrake));
+                BetterScoreSound();
+                Debug.Log("SonidoMejor!");
             }
             
             betterScore = true;
@@ -181,15 +183,12 @@ public class MainManager : MonoBehaviour
 
     
 
-    IEnumerator PlayAndDestroySound(AudioClip audioClip)
+    void BetterScoreSound()
     {
-        GameObject audioObject = new GameObject("AudioObject");
-        AudioSource audioSource = MainUIManager.Instance.AudioSourcePrefab.transform.GetComponent<AudioSource>();
-        audioSource.clip = audioClip;
-        audioSource.Play();
-
-        yield return new WaitForSeconds(audioClip.length); // Espera la duración del clip
-
-        Destroy(audioObject); // Destruye el GameObject y el AudioSource
+        if(audioManager != null) 
+        {
+            audioManager.volume = 0.5f;
+            audioManager.PlayOneShot(scoreBrake);
+        }
     }
 }
