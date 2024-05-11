@@ -5,12 +5,13 @@ using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 
 public class MainManager : MonoBehaviour
 {
     public Brick BrickPrefab;
-    public int LineCount = 5;
+    public int LineCount = 6;
     public Rigidbody Ball;
 
     [SerializeField] Text ScoreText;
@@ -46,10 +47,18 @@ public class MainManager : MonoBehaviour
     //Pause
     [SerializeField] GameObject pausePanel;
 
+    int totalLevelPoints = 0;
+
+    //Victory
+    [SerializeField] GameObject victoryPanel;
+    [SerializeField] AudioClip victorySound;
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
+        MainUIManager.Instance.LevelPoints = totalLevelPoints;
         m_GameOver = false;
         m_Started = false;
 
@@ -73,8 +82,10 @@ public class MainManager : MonoBehaviour
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
                 brick.PointValue = pointCountArray[i];
                 brick.onDestroyed.AddListener(AddPoint);
+                PointsCalculator(brick.PointValue);
             }
         }
+        Debug.Log(totalLevelPoints);
 
         //Recuperacion datos para escena
         if(MainUIManager.Instance != null)
@@ -85,9 +96,7 @@ public class MainManager : MonoBehaviour
 
             
             ScoreTextTop.text = "Best Score: " + topPlayerName +   ": " + topScore;
-            ScoreText.text = "Score " + playerName + " : 0" ;
-
-            
+            ScoreText.text = "Score " + playerName + " : 0" ; 
         }
     }
 
@@ -95,9 +104,9 @@ public class MainManager : MonoBehaviour
     {
         PauseGame();
 
-       //ResumeGameEsc();
-
         BetterScore();
+
+        StartCoroutine(VictoryPanel());
 
         if (!m_Started)
         {
@@ -126,6 +135,8 @@ public class MainManager : MonoBehaviour
                 RestardGame();
             }
         }
+       
+        
 
     }
 
@@ -274,6 +285,41 @@ public class MainManager : MonoBehaviour
             pausePanel.SetActive(false);
             Time.timeScale = 1f;
             MainUIManager.Instance.IsPaused = false;
+        }
+    }
+
+    void PointsCalculator(int points)
+    {
+        MainUIManager.Instance.LevelPoints = totalLevelPoints + points;
+    }
+
+    IEnumerator VictoryPanel()
+    {
+        if (m_Points >= MainUIManager.Instance.LevelPoints)
+        {
+            m_Points = 0;
+            Destroy(Ball);
+            WinSound();
+            victoryPanel.SetActive(true);
+
+
+            yield return new WaitForSeconds(2);
+
+            //Time.timeScale = 0f;
+            //MainUIManager.Instance.IsPaused = true;
+            
+        }
+
+            
+    }
+
+    void WinSound()
+    {
+        Debug.Log("entro");
+        if (audioManager != null)
+        {
+            audioManager.volume = 0.8f;
+            audioManager.PlayOneShot(victorySound);
         }
     }
 }

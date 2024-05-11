@@ -28,6 +28,8 @@ public class MainUIManager : MonoBehaviour
 
     public bool IsPaused;
 
+    public int LevelPoints;
+
 
     private void Awake()
     {
