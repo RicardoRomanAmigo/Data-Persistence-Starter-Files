@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 101204284}
   - component: {fileID: 101204288}
   - component: {fileID: 101204287}
+  - component: {fileID: 101204286}
   m_Layer: 0
   m_Name: MainUIManager
   m_TagString: MainContainer
@@ -251,6 +252,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &101204286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101204283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a76b32469d3c24b8f6beb70445340d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 0}
+  mouseEnterFx: {fileID: 0}
+  mouseClicFx: {fileID: 0}
 --- !u!82 &101204287
 AudioSource:
   m_ObjectHideFlags: 0
@@ -780,8 +796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myButton: {fileID: 938772541}
-  mouseEnterFx: {fileID: 8300000, guid: e65110440fdbdd842b2298373c78f938, type: 3}
-  mouseClicFx: {fileID: 8300000, guid: 29d5839f764dd11418b32bcbb249ae25, type: 3}
+  mouseEnterFx: {fileID: 8300000, guid: 13a4b8e21c4d5bb46b39e0b4576dcd5d, type: 3}
+  mouseClicFx: {fileID: 8300000, guid: 78e697f4b1856c54eb8b320f076eba47, type: 3}
 --- !u!114 &938772544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,8 +1127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myButton: {fileID: 941027094}
-  mouseEnterFx: {fileID: 8300000, guid: e65110440fdbdd842b2298373c78f938, type: 3}
-  mouseClicFx: {fileID: 8300000, guid: 29d5839f764dd11418b32bcbb249ae25, type: 3}
+  mouseEnterFx: {fileID: 8300000, guid: 13a4b8e21c4d5bb46b39e0b4576dcd5d, type: 3}
+  mouseClicFx: {fileID: 8300000, guid: 78e697f4b1856c54eb8b320f076eba47, type: 3}
 --- !u!114 &941027100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2263,8 +2279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myButton: {fileID: 1813016821}
-  mouseEnterFx: {fileID: 8300000, guid: e65110440fdbdd842b2298373c78f938, type: 3}
-  mouseClicFx: {fileID: 8300000, guid: 29d5839f764dd11418b32bcbb249ae25, type: 3}
+  mouseEnterFx: {fileID: 8300000, guid: 13a4b8e21c4d5bb46b39e0b4576dcd5d, type: 3}
+  mouseClicFx: {fileID: 8300000, guid: 78e697f4b1856c54eb8b320f076eba47, type: 3}
 --- !u!114 &1813016827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,7 +2484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onButton: {fileID: 2034549890}
   offButton: {fileID: 1166194268}
-  clickSound: {fileID: 8300000, guid: 29d5839f764dd11418b32bcbb249ae25, type: 3}
+  clickSound: {fileID: 8300000, guid: 78e697f4b1856c54eb8b320f076eba47, type: 3}
 --- !u!1 &1826185735
 GameObject:
   m_ObjectHideFlags: 0

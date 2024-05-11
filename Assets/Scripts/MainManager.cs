@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
+using UnityEditor;
 
 
 public class MainManager : MonoBehaviour
@@ -38,14 +39,17 @@ public class MainManager : MonoBehaviour
     [SerializeField] AudioClip scoreBrake;
     [SerializeField] AudioSource audioManager;
 
-    
-
+    //AudioManager audioManagerScript;
+    [SerializeField] AudioClip overBtn;
+    [SerializeField] AudioClip pressBtn;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       // audioManagerScript = new AudioManager();
+
+       
 
         MusicVolume(mainVolume);
 
@@ -113,7 +117,6 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        
     }
 
     void AddPoint(int point)
@@ -138,8 +141,7 @@ public class MainManager : MonoBehaviour
             else
             {
                 Debug.LogError("JsonDataFile is null");
-            }
-        
+            } 
     }
 
     void RestardGame()
@@ -191,4 +193,31 @@ public class MainManager : MonoBehaviour
             audioManager.PlayOneShot(scoreBrake);
         }
     }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
+    }
+
+    public void PlaySoundOverBtn()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound(overBtn);
+        }
+    }
+
+    public void PlaySoundPressBtn()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound(pressBtn);
+        }
+    }
+
+    
 }

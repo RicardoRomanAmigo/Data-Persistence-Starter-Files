@@ -36,8 +36,6 @@ public class TextManager : MonoBehaviour
         }
 
         //fxAudio = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
-
-
     }
 
     // Update is called once per frame
