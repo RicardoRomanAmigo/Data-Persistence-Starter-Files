@@ -26,6 +26,8 @@ public class MainUIManager : MonoBehaviour
 
     public GameObject AudioSourcePrefab;
 
+    public bool IsPaused;
+
 
     private void Awake()
     {

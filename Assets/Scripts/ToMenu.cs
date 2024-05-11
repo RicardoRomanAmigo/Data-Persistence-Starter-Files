@@ -7,6 +7,18 @@ public class ToMenu : MonoBehaviour
 {
    public void GoToMenu()
     {
+        
+
+        if(MainUIManager.Instance != null)
+        {
+            if (MainUIManager.Instance.IsPaused)
+            {
+                MainUIManager.Instance.IsPaused = false;
+                Time.timeScale = 1f;
+
+            }
+        }
+
         SceneManager.LoadScene(1);
     }
 }

@@ -43,13 +43,19 @@ public class MainManager : MonoBehaviour
     [SerializeField] AudioClip overBtn;
     [SerializeField] AudioClip pressBtn;
 
+    //Pause
+    [SerializeField] GameObject pausePanel;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        m_GameOver = false;
+        m_Started = false;
+
        // audioManagerScript = new AudioManager();
 
-       
+       Debug.Log(MainUIManager.Instance.IsPaused);
 
         MusicVolume(mainVolume);
 
@@ -87,6 +93,10 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
+        PauseGame();
+
+       //ResumeGameEsc();
+
         BetterScore();
 
         if (!m_Started)
@@ -219,5 +229,51 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    
+    public void PauseGame()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if(!MainUIManager.Instance.IsPaused)
+            {
+                if(pausePanel != null)
+                {
+                    Time.timeScale = 0f;
+                    pausePanel.SetActive(true);
+                    MainUIManager.Instance.IsPaused = true;
+                }
+            }
+            
+        }
+    }
+
+    public void ResumeGameEsc()
+    {
+        
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Debug.Log("ResumEsc");
+            Debug.Log(MainUIManager.Instance.IsPaused);
+            if (MainUIManager.Instance.IsPaused == true)
+            {
+                if (pausePanel != null)
+                {
+                    Time.timeScale = 1f;
+                    pausePanel.SetActive(false);
+                    MainUIManager.Instance.IsPaused = false;
+                }
+            }
+
+        }
+            
+    }
+
+    public void ResumeGame()
+    {
+        if (MainUIManager.Instance.IsPaused)
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1f;
+            MainUIManager.Instance.IsPaused = false;
+        }
+    }
 }

@@ -17,6 +17,8 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MainUIManager.Instance.IsPaused = false;    
+
         alertText.text = "";
 
         MainUIManager.Instance.TopPlayers = FileHandler.ReadFromJSON<InputEntry>("topScore.json");
