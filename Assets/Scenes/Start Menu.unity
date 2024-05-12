@@ -238,6 +238,8 @@ MonoBehaviour:
   MusicOn: 0
   MusicPauseTime: 0
   AudioSourcePrefab: {fileID: 7972155897383258920, guid: ac86968ca1f348447a5bcf9b68ef8167, type: 3}
+  IsPaused: 0
+  LevelPoints: 0
 --- !u!4 &101204285
 Transform:
   m_ObjectHideFlags: 0
@@ -1630,10 +1632,10 @@ RectTransform:
   m_Father: {fileID: 1822764901}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -134.49936, y: 210.44121}
-  m_SizeDelta: {x: -249.3721, y: -392.5328}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 275.31396, y: 33}
+  m_SizeDelta: {x: 550.6279, y: 57.467194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1316432554
 MonoBehaviour:
