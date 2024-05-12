@@ -16,12 +16,12 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] Text ScoreText;
     [SerializeField] Text ScoreTextTop;
+
     public GameObject GameOverText;
     public GameObject GameOverPanel;
     
     private bool m_Started = false;
     private int m_Points;
-    
     private bool m_GameOver = false;
 
     private string playerName;
@@ -52,8 +52,6 @@ public class MainManager : MonoBehaviour
     //Victory
     [SerializeField] GameObject victoryPanel;
     [SerializeField] AudioClip victorySound;
-    
-
 
     // Start is called before the first frame update
     void Start()
@@ -61,10 +59,6 @@ public class MainManager : MonoBehaviour
         MainUIManager.Instance.LevelPoints = totalLevelPoints;
         m_GameOver = false;
         m_Started = false;
-
-       // audioManagerScript = new AudioManager();
-
-       Debug.Log(MainUIManager.Instance.IsPaused);
 
         MusicVolume(mainVolume);
 
@@ -81,11 +75,11 @@ public class MainManager : MonoBehaviour
                 Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
                 brick.PointValue = pointCountArray[i];
+                Debug.Log("Sumo: " + brick.PointValue);
                 brick.onDestroyed.AddListener(AddPoint);
                 PointsCalculator(brick.PointValue);
             }
         }
-        Debug.Log(totalLevelPoints);
 
         //Recuperacion datos para escena
         if(MainUIManager.Instance != null)
@@ -94,7 +88,6 @@ public class MainManager : MonoBehaviour
             topPlayerName = MainUIManager.Instance.TopPlayerName;
             topScore = MainUIManager.Instance.TopScore;
 
-            
             ScoreTextTop.text = "Best Score: " + topPlayerName +   ": " + topScore;
             ScoreText.text = "Score " + playerName + " : 0" ; 
         }
@@ -135,9 +128,6 @@ public class MainManager : MonoBehaviour
                 RestardGame();
             }
         }
-       
-        
-
     }
 
     void AddPoint(int point)
@@ -152,11 +142,8 @@ public class MainManager : MonoBehaviour
         GameOverText.SetActive(true);
         GameOverPanel.SetActive(true);
 
-        
-
             if (inputHandler != null)
             {               
-                //saveLoadSystem.Save();
                 inputHandler.AddNameToList(playerName, m_Points);              
             }
             else
@@ -173,11 +160,8 @@ public class MainManager : MonoBehaviour
             topPlayerName = MainUIManager.Instance.TopPlayerName;
             topScore = MainUIManager.Instance.TopScore;
 
-
             ScoreTextTop.text = "Best Score: " + topPlayerName + ": " + topScore;
             ScoreText.text = "Score " + playerName + " : 0";
-
-
         }
     }
 
@@ -194,7 +178,6 @@ public class MainManager : MonoBehaviour
             betterScore = true;
 
             ScoreTextTop.text = "Best Score: " + playerName + ": " + m_Points;
-            
         }
     }
 
@@ -203,8 +186,6 @@ public class MainManager : MonoBehaviour
         musicPlayer = GameObject.FindGameObjectWithTag("MainContainer").transform.GetComponent<AudioSource>();
         musicPlayer.volume = level;
     }
-
-    
 
     void BetterScoreSound()
     {
@@ -217,11 +198,23 @@ public class MainManager : MonoBehaviour
 
     public void ExitGame()
     {
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#else
-        Application.Quit();
+        //#if UNITY_EDITOR
+        //EditorApplication.ExitPlaymode();
+        //#else
+        //Application.Quit();
+        //#endif
+
+#if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        Debug.Log(this.name + " : " + this.GetType() + " : " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 #endif
+#if (UNITY_EDITOR)
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif (UNITY_STANDALONE)
+    Application.Quit();
+#elif (UNITY_WEBGL)
+    Application.OpenURL("https://play.unity.com/mg/other/webgl-s7r");
+#endif
+
     }
 
     public void PlaySoundOverBtn()
@@ -290,27 +283,34 @@ public class MainManager : MonoBehaviour
 
     void PointsCalculator(int points)
     {
-        MainUIManager.Instance.LevelPoints = totalLevelPoints + points;
+        totalLevelPoints += points;
+        MainUIManager.Instance.LevelPoints = totalLevelPoints;
     }
 
     IEnumerator VictoryPanel()
     {
         if (m_Points >= MainUIManager.Instance.LevelPoints)
         {
+            if (inputHandler != null)
+            {
+                inputHandler.AddNameToList(playerName, m_Points);
+            }
+            else
+            {
+                Debug.LogError("JsonDataFile is null");
+            }
+
+            Debug.Log(totalLevelPoints);
+            Debug.Log("Points" + m_Points);
+            Debug.Log("Instancia" + MainUIManager.Instance.LevelPoints);
+
             m_Points = 0;
             Destroy(Ball);
             WinSound();
             victoryPanel.SetActive(true);
 
-
             yield return new WaitForSeconds(2);
-
-            //Time.timeScale = 0f;
-            //MainUIManager.Instance.IsPaused = true;
-            
-        }
-
-            
+        }  
     }
 
     void WinSound()

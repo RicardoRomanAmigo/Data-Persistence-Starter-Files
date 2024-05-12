@@ -6,8 +6,6 @@ public class ListLineUp : MonoBehaviour
 {
     float topBorder = 250.0f;
     float moveSpeed = 1.0f;
-    // Start is called before the first frame update
-    
 
     IEnumerator Start()
     {

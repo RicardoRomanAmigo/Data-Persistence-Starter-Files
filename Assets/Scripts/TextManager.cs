@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
-
 public class TextManager : MonoBehaviour
 {
-     AudioSource fxAudio;
+    AudioSource fxAudio;
 
     [SerializeField] GameObject myButton;
-    //[SerializeField] GameObject myText;
+    
     Text myText;
     Color textColor;
     Color colorOver = new Color(1.0f, 0.64f, 0.0f);
@@ -23,8 +21,6 @@ public class TextManager : MonoBehaviour
     [SerializeField] AudioClip  mouseEnterFx;
     [SerializeField] AudioClip  mouseClicFx;
 
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -35,20 +31,10 @@ public class TextManager : MonoBehaviour
             colorOriginal = myText.color;  
         }
 
-        //fxAudio = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void OnMouseEnter()
     {
-        Debug.Log("entroboton");
-
         if (myText != null)
         {
             myText.color = colorOver;  
@@ -80,9 +66,6 @@ public class TextManager : MonoBehaviour
 
     void MakeClick()
     {
-        //fxAudio.volume = 0.1f;
-        //fxAudio.PlayOneShot(mouseEnterFx);
-
         AudioManager.Instance.PlaySound(mouseEnterFx);
     }
 }

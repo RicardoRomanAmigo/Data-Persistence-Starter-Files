@@ -12,15 +12,12 @@ public class MusicButton : MonoBehaviour
     [SerializeField] AudioClip clickSound;
     AudioSource music;
     AudioSource fxSounds;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         music = GameObject.FindGameObjectWithTag("MainContainer").GetComponent<AudioSource>();
-        //fxSounds = GameObject.FindGameObjectWithTag("FxAudioSource").GetComponent<AudioSource>();
-
         
-
         if (music.isPlaying)
         {
             MainUIManager.Instance.MusicOn = true;
@@ -33,18 +30,11 @@ public class MusicButton : MonoBehaviour
             onButton.SetActive(false);
             offButton.SetActive(true);
         }
-        Debug.Log(MainUIManager.Instance.MusicOn);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void MusicOff()
     {
-        if (onButton != null )
+        if (onButton != null)
         {
             onButton.SetActive(false);
             offButton.SetActive(true);
@@ -64,18 +54,14 @@ public class MusicButton : MonoBehaviour
             MakeClick();
             music.Play();
             float pauseTime = MainUIManager.Instance.MusicPauseTime;
-            float elapsedTime = Time.time - pauseTime;  
+            float elapsedTime = Time.time - pauseTime;
             music.time = elapsedTime;
             MainUIManager.Instance.MusicOn = true;
         }
     }
 
-   public void MakeClick()
+    public void MakeClick()
     {
-        //fxSounds.volume = 0.3f;
-        //fxSounds.PlayOneShot(clickSound);
-
-        
-       AudioManager.Instance.PlaySound(clickSound);
+        AudioManager.Instance.PlaySound(clickSound);
     }
 }

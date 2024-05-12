@@ -15,8 +15,14 @@ public class Ball : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+
     }
-    
+
+    private void Update()
+    {
+        StartCoroutine(BallBug());
+    }
+
     private void OnCollisionExit(Collision other)
     {
         var velocity = m_Rigidbody.velocity;
@@ -53,6 +59,32 @@ public class Ball : MonoBehaviour
             {
                 AudioManager.Instance.Volume(volumeSides);
                 AudioManager.Instance.PlaySound(myClipSides);
+            }
+        }
+    }
+
+    //Si la bola solo sube in baja sin cambiar x
+    IEnumerator BallBug()
+    {
+        if(m_Rigidbody != null)
+        {
+            if (m_Rigidbody.velocity.magnitude > 0.1f)
+            {
+                Vector3 ballPos = gameObject.transform.position;
+                yield return new WaitForSeconds(2);
+                Vector3 ballPos2 = gameObject.transform.position;
+
+                if (ballPos.x == ballPos2.x)
+                {
+                    if (ballPos.x >= 0)
+                    {
+                        gameObject.transform.position -= new Vector3(0.2f, 0f, 0f);
+                    }
+                    else if (ballPos.x < 0)
+                    {
+                        gameObject.transform.position += new Vector3(0.2f, 0f, 0f);
+                    }
+                }
             }
         }
     }

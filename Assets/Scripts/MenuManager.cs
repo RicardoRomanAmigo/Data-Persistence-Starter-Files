@@ -12,8 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Text topScoreTxt;
     [SerializeField] Text alertText;
     [SerializeField] Animator panelTopPlayer;
-    //[SerializeField] GameObject audioSourcePrefab;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +26,6 @@ public class MenuManager : MonoBehaviour
 
         TopPanelDown();
 
-        //MainUIManager.Instance.AudioSourcePrefab = audioSourcePrefab;
     }
     
     public void ProcessGameData()
@@ -56,11 +54,23 @@ public class MenuManager : MonoBehaviour
 
     public void ExitGame()
     {
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#else
-        Application.Quit();
+        //#if UNITY_EDITOR
+        //EditorApplication.ExitPlaymode();
+        //#else
+        //Application.Quit();
+        //#endif
+
+#if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        Debug.Log(this.name + " : " + this.GetType() + " : " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 #endif
+#if (UNITY_EDITOR)
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif (UNITY_STANDALONE)
+    Application.Quit();
+#elif (UNITY_WEBGL)
+    Application.OpenURL("https://play.unity.com/mg/other/webgl-s7r");
+#endif
+
     }
 
     public void NewNameSelected(Text text)
@@ -74,7 +84,6 @@ public class MenuManager : MonoBehaviour
         {
             alertText.text = "";
         }
-        
     }
 
     void TopPanelDown()

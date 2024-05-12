@@ -42,5 +42,4 @@ public class MainUIManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
 }

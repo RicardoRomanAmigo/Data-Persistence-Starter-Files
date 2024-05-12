@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
 
-     private AudioSource _audioSource;
+    private AudioSource _audioSource;
     private bool isPlaying = false;
 
     private void Awake()
@@ -61,7 +61,6 @@ public class AudioManager : MonoBehaviour
             _audioSource.Play();
 
             Invoke(nameof(ResetIsPlaying), clip.length);
-
         }
     }
 
@@ -77,8 +76,6 @@ public class AudioManager : MonoBehaviour
 
     public void Volume(float volume)
     {
-        
         _audioSource.volume = volume;
     }
-    //for more sound methods
 }

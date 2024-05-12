@@ -22,15 +22,8 @@ public class MainButtonsManager : MonoBehaviour
         colorOriginal = Color.white;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnMouseEnter()
     {
-
         if (childTxt != null)
         {
             childTxt.color = colorOver;
@@ -47,11 +40,9 @@ public class MainButtonsManager : MonoBehaviour
 
     public void OnMouseDown()
     {
-
         if (childTxt != null)
         {
             childTxt.color = colorSelect;
         }
     }
-
 }

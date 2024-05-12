@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ToMenu : MonoBehaviour
 {
-   public void GoToMenu()
+    public void GoToMenu()
     {
-        
-
-        if(MainUIManager.Instance != null)
+        if (MainUIManager.Instance != null)
         {
             if (MainUIManager.Instance.IsPaused)
             {
